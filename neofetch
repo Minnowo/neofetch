@@ -4091,6 +4091,11 @@ print_ascii() {
     ascii_data="${ascii_data//\$\{c5\}/$c5}"
     ascii_data="${ascii_data//\$\{c6\}/$c6}"
 
+    # if ascii_width is set in config, use that
+    if ! [ -k ${ascii_width+x} ]; then 
+       ascii_len=ascii_width
+    fi
+
     ((text_padding=ascii_len+gap))
     printf '%b\n' "$ascii_data${reset}"
     LC_ALL=C
