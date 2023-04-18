@@ -773,6 +773,16 @@ image_source="auto"
 
 # Ascii Options
 
+# Specify the width the ascii should be considered when rendering the text
+#
+# Default:  'auto'
+# Values:   'auto', '<insert any number here, this will be the char width used>'
+# 
+# Flag:     None
+#
+# NOTE: 'auto' should be used unless specifying image_source='path/to/ascii.txt' causes 
+#       wider / with extra whitespace than you want.
+ascii_width="auto"
 
 # Ascii distro
 # Which distro's ascii art to display.
@@ -4092,7 +4102,7 @@ print_ascii() {
     ascii_data="${ascii_data//\$\{c6\}/$c6}"
 
     # if ascii_width is set in config, use that
-    if ! [ -k ${ascii_width+x} ]; then 
+    if ! [ -k ${ascii_width+x} ] && [ "$ascii_width" != "auto" ]; then 
        ascii_len=ascii_width
     fi
 
